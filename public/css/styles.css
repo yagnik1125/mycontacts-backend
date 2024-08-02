@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#auth-section, #contact-section {
+#auth-section, #contact-section,#register-section {
     max-width: 600px;
     margin: auto;
     padding: 20px;

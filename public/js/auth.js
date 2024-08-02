@@ -99,6 +99,30 @@
 
 //------------------------------------------------------------------------------------------
 
+document.getElementById('show-register').addEventListener('click', function() {
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('register-section').style.display = 'block';
+});
+
+document.getElementById('show-login').addEventListener('click', function() {
+    document.getElementById('register-section').style.display = 'none';
+    document.getElementById('auth-section').style.display = 'block';
+});
+
+// Handle login and registration form submissions here
+
+document.getElementById('login').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Add login functionality here
+});
+
+document.getElementById('register').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Add registration functionality here
+});
+
+// 
+
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('register');
     const loginForm = document.getElementById('login');
