@@ -19,7 +19,7 @@ const getContacts = asyncHandler(async (req, res) => { //gonna return request an
 const createContact = asyncHandler(async (req, res) => { //gonna return request and results
     console.log("The request Body is: ", req.body);
     const { name, email, phone } = req.body;
-    if (!name || !email || !phone) {
+    if (!name || !phone) {
         res.status(400);
         throw new Error("All fields are required to be filled");
     }
