@@ -1,6 +1,7 @@
 const {constants}=require("../constants");
 const errorHandler = (err, req, res, next) => {
-    const statusCode = res.statusCode ? res.statusCode : 500;
+    const statusCode = res.statusCode >= 400 ? res.statusCode : 500;
+    res.status(statusCode);
     switch (statusCode) {
         case constants.VALIDATION_ERROR:
             res.json({ title: "Validation Failed", message: err.message, stackTrace: err.stack });
@@ -18,7 +19,7 @@ const errorHandler = (err, req, res, next) => {
             res.json({ title: "Server Error", message: err.message, stackTrace: err.stack });
             break;
         default:
-            console.log("No error, All good.",statusCode);
+            res.json({ title: "Server Error", message: err.message });
             break;
     }
 };

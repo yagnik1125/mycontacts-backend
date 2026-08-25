@@ -1,13 +1,30 @@
 const mongoose = require("mongoose");
+let connectionPromise;
+
 const connectDb = async () => {
-    try {
-        const connect = await mongoose.connect(process.env.CONNECTION_STRING);
-        console.log("Database connected: ", connect.connection.host, connect.connection.name);
+    if (mongoose.connection.readyState === 1) {
+        return mongoose.connection;
     }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
+
+    if (connectionPromise) {
+        return connectionPromise;
     }
-}
+
+    if (!process.env.CONNECTION_STRING) {
+        throw new Error("CONNECTION_STRING is not configured");
+    }
+
+    connectionPromise = mongoose.connect(process.env.CONNECTION_STRING)
+        .then((connect) => {
+            console.log("Database connected: ", connect.connection.host, connect.connection.name);
+            return connect.connection;
+        })
+        .catch((error) => {
+            connectionPromise = undefined;
+            throw error;
+        });
+
+    return connectionPromise;
+};
 
 module.exports = connectDb;

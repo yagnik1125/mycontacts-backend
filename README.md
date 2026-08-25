@@ -46,8 +46,8 @@ Before you begin, ensure you have met the following requirements:
 
     ```env
     PORT=5001
-    MONGODB_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
+    CONNECTION_STRING=your_mongodb_connection_string
+    ACCESS_TOKEN_SECRET=your_jwt_secret
     ```
 
 ### Running the Application
@@ -59,6 +59,17 @@ Before you begin, ensure you have met the following requirements:
     ```
 
 2. Open your browser and navigate to `http://localhost:5001`
+
+### Deploying to Netlify
+
+This project is configured as a Netlify Functions application. Netlify serves the frontend from `public/` and routes `/api/*` requests to the Express function in `netlify/functions/api.js`.
+
+1. Import the repository into Netlify.
+2. Keep the base directory at the project root and use the included `netlify.toml` settings.
+3. Add `CONNECTION_STRING` and `ACCESS_TOKEN_SECRET` as Netlify environment variables for the deployed site.
+4. Ensure the MongoDB deployment allows connections from Netlify and never commit `.env`.
+
+For local Netlify-style testing, install the Netlify CLI and run `netlify dev`.
 
 ## API Endpoints
 
